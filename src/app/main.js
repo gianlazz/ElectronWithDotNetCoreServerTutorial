@@ -57,3 +57,35 @@ app.on('activate', function () {
 })
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+/*==== FOR SETUP OF ASPNET CORE WEBAPI KESTREL SERVER BINARY LAUNCH ====*/
+
+const os = require('os');
+var apiProcess = null;
+
+function startApi() {
+  var proc = require('child_process').spawn;
+  //  run server
+  var apipath = path.join(__dirname, '..\\api\\bin\\dist\\win\\api.exe')
+  if (os.platform() === 'darwin') {
+    apipath = path.join(__dirname, '..//api//bin//dist//osx//Api')
+  }
+  apiProcess = proc(apipath)
+
+  apiProcess.stdout.on('data', (data) => {
+    writeLog(`stdout: ${data}`);
+    if (mainWindow == null) {
+      createWindow();
+    }
+  });
+}
+
+//Kill process when electron exits
+process.on('exit', function () {
+  writeLog('exit');
+  apiProcess.kill();
+});
+
+function writeLog(msg){
+  console.log(msg);
+}
