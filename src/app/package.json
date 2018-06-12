@@ -6,12 +6,37 @@
   "repository": "",
   "main": "main.js",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "electron-builder": "^20.15.1"
   },
   "dependencies": {
     "angular": "^1.6.1"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "cross-platform-desktop",
+    "directories": {
+      "buildResources": "../../assets",
+      "output": "../../dist"
+    },
+    "extraResources": {
+      "from": "../api/bin/dist/",
+      "to": "api/bin/dist/",
+      "filter": [
+        "**/*"
+      ]
+    },
+    "mac": {
+      "category": "cross-platform-desktop"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
   }
 }
+
