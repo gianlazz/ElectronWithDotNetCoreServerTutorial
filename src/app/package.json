@@ -1,0 +1,17 @@
+{
+  "name": "cross-platform-desktop",
+  "version": "1.0.0",
+  "description": "cross-platform-desktop",
+  "author": "",
+  "repository": "",
+  "main": "main.js",
+  "devDependencies": {
+    "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "angular": "^1.6.1"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
