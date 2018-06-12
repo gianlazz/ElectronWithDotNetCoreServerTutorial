@@ -61,18 +61,18 @@ app.on('activate', function () {
 /*==== FOR SETUP OF ASPNET CORE WEBAPI KESTREL SERVER BINARY LAUNCH ====*/
 
 const os = require('os');
-var apiProcess = null;
+var webapiProcess = null;
 
-function startApi() {
+function startwebapi() {
   var proc = require('child_process').spawn;
   //  run server
-  var apipath = path.join(__dirname, '..\\api\\bin\\dist\\win\\api.exe')
+  var webapipath = path.join(__dirname, '..\\webapi\\bin\\dist\\win\\webapi.exe')
   if (os.platform() === 'darwin') {
-    apipath = path.join(__dirname, '..//api//bin//dist//osx//Api')
+    webapipath = path.join(__dirname, '..//webapi//bin//dist//osx//Webapi')
   }
-  apiProcess = proc(apipath)
+  webapiProcess = proc(webapipath)
 
-  apiProcess.stdout.on('data', (data) => {
+  webapiProcess.stdout.on('data', (data) => {
     writeLog(`stdout: ${data}`);
     if (mainWindow == null) {
       createWindow();
@@ -83,7 +83,7 @@ function startApi() {
 //Kill process when electron exits
 process.on('exit', function () {
   writeLog('exit');
-  apiProcess.kill();
+  webapiProcess.kill();
 });
 
 function writeLog(msg){
